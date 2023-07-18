@@ -166,13 +166,16 @@ console.log(setToArray(new Set([1, 2, 3, "b", "a", "c"])));
  * arr - Масив, з якого потрібно видалити дублікати.
  */
 function removeDuplicatesInPlace(arr) {
-  const duplicate = new Set(arr);
-  for (let i = 0; i <= arr.length; i++) {
-    if (duplicate.hasOwnProperty(i)) {
-      arr.delete(i);
+  let uniqueSet = new Set();
+  for (let i = 0; i < arr.length; i++) {
+    if (uniqueSet.has(arr[i])) {
+      arr.splice(i, 1);
+      i--;
+    } else {
+      uniqueSet.add(arr[i]);
     }
   }
-  return duplicate;
+  return uniqueSet;
   // Створення множини для збереження унікальних елементів
   // Перебір елементів масиву за допомогою циклу for від 0 до довжини масиву
   // Перевірка, чи елемент вже присутній у множині
@@ -324,9 +327,12 @@ iterateSet(new Set(["a", "b", "c"]));
  * Повертаємо - Суму числових елементів у множині.
  */
 function sumNumbers(set) {
-  const sum = new Set();
-  set.forEach();
-  typeof elem === "number", (sum += elem);
+  let sum = 0;
+  set.forEach((item) => {
+    if (typeof item === "number") {
+      sum += item;
+    }
+  });
   return sum;
 
   // Використання методу forEach для перебору елементів множини
